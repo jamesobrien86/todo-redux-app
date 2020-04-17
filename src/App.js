@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import ReactDOM from 'react-dom';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { TodoList } from './containers';
+import reducer from './reducer';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+const store = createStore(reducer);
+console.log(store, "store")
+
+const dummyTodos = [
+  { id: 0, isDone: true,  text: 'make components' },
+  { id: 1, isDone: false, text: 'design actions' },
+  { id: 2, isDone: false, text: 'implement reducer' },
+  { id: 3, isDone: false, text: 'connect components' }
+];
+
+ReactDOM.render(
+  <Provider store={store}>
+    <TodoList />
+  </Provider>
+  , 
+    document.getElementById('app')
   );
-}
 
-export default App;
